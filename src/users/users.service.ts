@@ -38,4 +38,9 @@ export class UsersService {
   async remove(id: string) {
     return this.userModel.findByIdAndDelete(id);
   }
+
+  async findByEmail(email: string) {
+    return this.userModel.findOne({ email });
+  }
+
 }
