@@ -12,8 +12,9 @@ export class CartService {
   ) {}
 
   async getActiveCart(userId: string) {
-    let cart = await this.cartModel.findOne({ userId, status: 'ACTIVE' });
-
+    let cart = await this.cartModel
+      .findOne({ userId, status: 'ACTIVE' })
+      .populate('items.productId');
     if (!cart) {
       cart = new this.cartModel({ userId });
       await cart.save();

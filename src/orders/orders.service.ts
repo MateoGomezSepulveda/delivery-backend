@@ -39,11 +39,16 @@ export class OrdersService {
     }
 
     async findMyOrders(userId: string){
-        return this.orderModel.find({ userId });
+        return this.orderModel
+        .find({ userId })
+        .populate('items.productId');
     }
 
     async findAllOrders(){
-        return this.orderModel.find();
+        return this.orderModel
+        .find()
+        .populate('items.productId')
+        .populate('userId');
     }
 
     async updateStatus(orderId: string, status: string){

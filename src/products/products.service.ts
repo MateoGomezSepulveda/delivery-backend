@@ -13,11 +13,15 @@ export class ProductsService {
   }
 
   async findAll() {
-    return this.productModel.find();
+    return this.productModel
+    .find()
+    .populate('categoryId');
   }
 
   async findOne(id: string) {
-    return this.productModel.findById(id);
+    return this.productModel
+    .findById(id)
+    .populate('categoryId');
   }
 
   async update(id: string, updateData: Partial<Product>) {
