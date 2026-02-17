@@ -4,6 +4,7 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { OrdersService } from './orders.service';
 import { Roles } from 'src/auth/roles.decorator';
 import { Role } from 'src/auth/roles.enum';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('orders')
@@ -13,7 +14,7 @@ export class OrdersController {
     ){}
 
     @Post()
-    createOrder(@Req() req, @Body() body: { address: string}) {
+    createOrder(@Req() req, @Body() body: CreateOrderDto) {
         return this.ordersService.createOrder(req.user.userId, body.address);
     }
 

@@ -4,6 +4,8 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { Role } from '../auth/roles.enum';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('products')
@@ -12,7 +14,7 @@ export class ProductsController {
 
   @Post()
   @Roles(Role.ADMIN)
-  create(@Body() body: any) {
+  create(@Body() body: CreateProductDto) {
     return this.productsService.create(body);
   }
 
@@ -28,7 +30,7 @@ export class ProductsController {
 
   @Patch(':id')
   @Roles(Role.ADMIN)
-  update(@Param('id') id: string, @Body() body: any) {
+  update(@Param('id') id: string, @Body() body: UpdateProductDto) {
     return this.productsService.update(id, body);
   }
 

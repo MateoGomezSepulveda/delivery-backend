@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { CategoriesService } from './categories.service';
 import { Roles } from 'src/auth/roles.decorator';
 import { Role } from 'src/auth/roles.enum';
+import { CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('categories')
 export class CategoriesController {
@@ -9,7 +11,7 @@ export class CategoriesController {
 
     @Post()
     @Roles(Role.ADMIN)
-    create(@Body() body:any){
+    create(@Body() body:CreateCategoryDto){
         return this.categoriesService.create(body);
     }
 
@@ -25,7 +27,7 @@ export class CategoriesController {
 
     @Patch(':id')
     @Roles(Role.ADMIN)
-    update(@Param('id') id:string, @Body() body:any){
+    update(@Param('id') id:string, @Body() body: UpdateCategoryDto){
         return this.categoriesService.update(id, body);
     }
 
