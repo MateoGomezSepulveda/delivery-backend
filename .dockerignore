@@ -1,0 +1,19 @@
+# Dependencias
+node_modules
+
+# Build output
+dist
+
+# Git
+.git
+.gitignore
+
+# Logs
+npm-debug.log
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Variables sensibles
+.env

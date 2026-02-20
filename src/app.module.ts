@@ -6,12 +6,17 @@ import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CartModule } from './cart/cart.module';
 import { OrdersModule } from './orders/orders.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://mateos2090_db_user:delivery_app@deliveryapp.u8jrjaj.mongodb.net/',
-    ),
+    MongooseModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGO_URI'),
+      }),
+    }),
+    ConfigModule.forRoot({ isGlobal: true }),
     UsersModule,
     AuthModule,
     ProductsModule,
